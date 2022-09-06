@@ -1,0 +1,157 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+ Timer timer1, timer2 ,timer3,timer4,timer5,timer6,timer7,timer8;
+  
+  message Sensor_input data1;
+  
+  
+ 
+}
+on start
+{
+  write("simulation started");
+}
+
+on stopMeasurement
+{
+  write("simulation has stop");;
+}
+
+on sysvar Fob_key::Fob_key
+{
+  if (@Fob_key::Fob_key==1)
+  {
+    write("foot sensor will work");
+    
+    setTimer(timer1,2);
+    
+    
+  }
+  else{
+    write("trunk door will be close only");
+    cancelTimer(timer1);
+    cancelTimer(timer2);
+    
+    
+  }
+  
+}
+on key 's'
+{
+  if(@Fob_key::Fob_key==0)
+  {
+    @Fob_key::Fob_key=1;
+    write("fob key detected");
+  }
+  else
+  {
+    @Fob_key::Fob_key=0;
+    write("fob key is not detected");
+  }
+}
+on timer timer1
+{
+  $Fob_sensor_data=0;
+  $Foot_sensor_data=0;
+  $Obstacles_sensor_data=0;
+  output(data1);
+  write("1st data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+   setTimer (timer2,2);
+  
+}
+on timer timer2
+{
+  $Fob_sensor_data=0;
+  $Foot_sensor_data=0;
+  $Obstacles_sensor_data=1;
+  output(data1);
+  write("2nd set of data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer3,2);
+  
+  
+ 
+  
+}
+on timer timer3
+{
+  $Fob_sensor_data=0;
+  $Foot_sensor_data=1;
+  $Obstacles_sensor_data=0;
+  output(data1);
+  write("3rd set of data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer4,2);
+  
+  
+}
+on timer timer4 
+{
+  $Fob_sensor_data=0;
+  $Foot_sensor_data=1;
+  $Obstacles_sensor_data=1;
+  output(data1);
+  write("4th set of data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer5,2);
+  
+  
+}
+on timer timer5
+{
+  $Fob_sensor_data=0;
+  $Foot_sensor_data=1;
+  $Obstacles_sensor_data=0;
+  output(data1);
+  write("5th data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer6,2);
+  
+  
+}
+on timer timer6
+{
+  $Fob_sensor_data=1;
+  $Foot_sensor_data=0;
+  $Obstacles_sensor_data=0;
+  output(data1);
+  write("6th data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer7,2);
+  
+  
+}
+on timer timer7
+{
+  $Fob_sensor_data=1;
+  $Foot_sensor_data=1;
+  $Obstacles_sensor_data=0;
+  output(data1);
+  write("7th data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  setTimer (timer8,2);
+  
+  
+}
+on timer timer8
+{
+  $Fob_sensor_data=1;
+  $Foot_sensor_data=1;
+  $Obstacles_sensor_data=1;
+  output(data1);
+  write("yentu data has been sent");
+  write("fob %d foot %d obstacles %d" ,Fob_sensor_data,Foot_sensor_data,Obstacles_sensor_data);
+  
+  
+  
+}
+
+
+

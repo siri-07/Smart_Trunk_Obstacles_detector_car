@@ -1,0 +1,106 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  int temp,temp2,temp3;
+  
+}
+void Maintest() //entry point of test module
+{
+  testModuleTitle("Smart trunk obstacles detector Test Report");
+  testModuleDescription("This report is give information on the testcases executed on Fob_key ");
+  testReportAddEngineerInfo("Test Engineer Name: ","Shreyashi Sonkar");
+  testReportAddEngineerInfo("PS Number: ", "40020868");
+  testcase1();
+  testcase2();
+  testcase3();
+  
+}
+
+//Verification of Fob_key
+testcase testcase1()
+{
+  //Fob_key is 1 when a msg is recieved
+  temp=testWaitForMessage(Sensor_input, 10000);
+  if(temp==1)
+  {
+    if(@Fob_key::Fob_key==1)
+    {
+        //Correct execution scenario
+      write("Fob_key message is recieved");
+      testStepPass("Message is received when Fob_key near to car around 1 meter");
+    }
+    else
+    {
+      //Error scenario
+      testStepPass("Message is received but Fob_key is on");
+    }
+    
+  }
+  else
+  {
+    write("Message has not recieved");
+    //warning scenario
+    testStepWarning("Message is not been recieved");
+  }
+  
+}
+testcase testcase2()
+{
+  //Foot_sensor is 1 when a msg is recieved
+  temp2=testWaitForSignalChange(TrunkAction, 10000);
+  if(temp2==1)
+  {
+    if($Foot_sensor_data==1)
+    {
+        //Correct execution scenario
+      write("Foot_sensor message is recieved");
+      testStepPass("Message is received when foot kick on the sensor");
+    }
+    else
+    {
+      //Error scenario
+      testStepPass("Message is received but Foot_sensor is on");
+    }
+    
+  }
+  else
+  {
+    write("Message has not recieved");
+    //warning scenario
+    testStepWarning("Message is not been recieved");
+  }
+  
+}
+testcase testcase3()
+{
+  //obstacles_sensor is 1 when a msg is recieved
+  temp=testWaitForSignalChange(Obstacles_sensor_data, 10000);
+  if(temp3==1)
+  {
+    if($Obstacles_sensor_data==1)
+    {
+        //Correct execution scenario
+      write("obstacles_sensor message is recieved");
+      testStepPass("Message is received when obstacles_sensor sense any obstacles");
+    }
+    else
+    {
+      //Error scenario
+      testStepPass("Message is received but obstacles_sensor is on");
+    }
+    
+  }
+  else
+  {
+    write("Message has not recieved");
+    //warning scenario
+    testStepWarning("Message is not been recieved");
+  }
+  
+}
+

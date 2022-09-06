@@ -1,0 +1,31 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  message Obstacles_sensor_action data2;
+}
+on message Sensor_input
+{
+  if ($Fob_sensor_data==1 && $Foot_sensor_data==1)
+  {
+    $TrunkAction=0;
+    output(data2);
+    write("trunk door can be open");
+  }
+  else if ($Fob_sensor_data==1 && $Foot_sensor_data==1 && $Obstacles_sensor_data==1)
+  {
+    $TrunkAction=0;
+    output(data2);
+    write("trunk door will be open");
+  }
+  else
+  {
+    $TrunkAction=1;
+    output(data2); 
+    write("trunk can be closed");
+  }
+}

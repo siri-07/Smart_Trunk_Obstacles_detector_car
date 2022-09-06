@@ -1,0 +1,21 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  message Obstacles_sensor_action data2;
+}
+on message Obstacles_sensor_action
+{
+  if($TrunkAction==0)
+  {
+    write("Door open");
+  }
+  else
+  {
+    write("door closed");
+  }
+} 
